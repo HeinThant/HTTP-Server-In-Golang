@@ -1,0 +1,119 @@
+# Golang HTTP Server with CRUD Functionality and UI
+
+## Overview
+This project is a simple HTTP server written in Golang that provides CRUD (Create, Read, Update, Delete) functionality for managing items. The server includes a basic HTML & JavaScript UI for testing the API.
+
+## Features
+- RESTful API with CRUD operations
+- Simple in-memory storage (no database required)
+- Frontend UI for interacting with the API
+- Reset functionality to clear stored data
+
+## Project Structure
+```
+/golang-crud
+  ├── main.go         # Golang backend
+  ├── static/
+  │   ├── index.html  # UI for testing
+  │   ├── script.js   # JavaScript logic
+  ├── go.mod         # Go module file
+```
+
+## Installation & Setup
+### Prerequisites
+- Go (>= 1.18)
+- Curl or a web browser for testing
+
+### Steps to Run
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/your-repo/golang-crud.git
+   cd golang-crud
+   ```
+2. Initialize the Go module:
+   ```sh
+   go mod init golang-crud
+   ```
+3. Run the server:
+   ```sh
+   go run main.go
+   ```
+4. Open `http://localhost:8080` in a browser to access the UI.
+
+## API Endpoints
+### 1. Get All Items
+- **Endpoint:** `GET /items`
+- **Response:** JSON array of items
+```json
+[
+  {"id": 1, "name": "Apple"},
+  {"id": 2, "name": "Banana"}
+]
+```
+
+### 2. Create an Item
+- **Endpoint:** `POST /items`
+- **Request Body:** JSON object
+```json
+{"name": "Orange"}
+```
+- **Response:**
+```json
+{"id": 3, "name": "Orange"}
+```
+
+### 3. Update an Item
+- **Endpoint:** `PUT /items?id=1`
+- **Request Body:** JSON object
+```json
+{"name": "Grapes"}
+```
+- **Response:**
+```json
+{"id": 1, "name": "Grapes"}
+```
+
+### 4. Delete an Item
+- **Endpoint:** `DELETE /items?id=1`
+- **Response:** HTTP 204 No Content
+
+### 5. Reset Server
+- **Endpoint:** `POST /reset`
+- **Response:**
+```json
+"Server reset successfully"
+```
+
+## Frontend UI
+The UI is a simple HTML page that allows users to interact with the API using buttons.
+
+### Running the UI
+1. Start the server (`go run main.go`).
+2. Open `http://localhost:8080` in a web browser.
+3. Use the input field and buttons to perform CRUD operations.
+
+## Testing with cURL
+Run the following `curl` commands to test the API:
+
+```sh
+# Get all items
+curl -X GET http://localhost:8080/items
+
+# Add a new item
+curl -X POST -H "Content-Type: application/json" -d '{"name": "Apple"}' http://localhost:8080/items
+
+# Update an item
+curl -X PUT -H "Content-Type: application/json" -d '{"name": "Banana"}' http://localhost:8080/items?id=1
+
+# Delete an item
+curl -X DELETE http://localhost:8080/items?id=1
+
+# Reset server
+curl -X POST http://localhost:8080/reset
+```
+
+## Conclusion
+This project demonstrates how to build a basic HTTP server in Golang with CRUD functionality and a simple frontend. You can extend this by integrating a database, adding authentication, or improving the UI.
+
+For any questions or improvements, feel free to contribute!
+
